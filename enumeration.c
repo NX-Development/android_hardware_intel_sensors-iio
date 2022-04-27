@@ -98,7 +98,7 @@ sensor_catalog_entry_t sensor_catalog[] = {
 		.num_channels	= 1,
 		.is_virtual	= 0,
 		.channel = {
-			{ DECLARE_GENERIC_CHANNEL("illuminance") },
+			{ DECLARE_GENERIC_CHANNEL("illuminance0") },
 		},
 	},
 	{
@@ -163,7 +163,7 @@ sensor_catalog_entry_t sensor_catalog[] = {
 		.num_channels	= 1,
 		.is_virtual	= 0,
 		.channel = {
-			{ DECLARE_GENERIC_CHANNEL("proximity") },
+			{ DECLARE_GENERIC_CHANNEL("proximity0") },
 		},
 	},
 	{
