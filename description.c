@@ -357,7 +357,7 @@ float sensor_get_resolution (int s)
 	}
 
 	if (sensor[s].resolution != 0.0 ||
-	    !sensor_get_fl_prop(s, "resolution", &sensor[s].resolution)) {
+		!sensor_get_fl_prop(s, "resolution", &sensor[s].resolution)) {
 		return sensor[s].resolution;
 	}
 
@@ -529,11 +529,16 @@ int sensor_get_mounting_matrix (int s, float mm[9])
 			return 0;
 	}
 
-	sprintf(mm_path, MOUNTING_MATRIX_PATH, dev_num);
+	sprintf(mm_path, SENSOR_MOUNTING_MATRIX_PATH, dev_num);
 
 	err = sysfs_read_str(mm_path, mm_buf, sizeof(mm_buf));
-	if (err < 0)
-		return 0;
+	if (err < 0) {
+		sprintf(mm_path, DEVICE_MOUNTING_MATRIX_PATH, dev_num);
+
+		err = sysfs_read_str(mm_path, mm_buf, sizeof(mm_buf)); 
+		if (err < 0)
+			return 0;
+	}
 
 	for(i = 0; i < 9; i++) {
 		float f;

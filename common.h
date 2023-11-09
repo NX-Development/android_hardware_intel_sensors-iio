@@ -47,7 +47,8 @@
 #define DEVICE_AVAIL_FREQ_PATH	BASE_PATH "sampling_frequency_available"
 #define ILLUMINATION_CALIBPATH	BASE_PATH "in_illuminance_calibscale"
 #define SENSOR_CALIB_BIAS_PATH	BASE_PATH "in_%s_calibbias"
-#define MOUNTING_MATRIX_PATH	BASE_PATH "mounting_matrix"
+#define SENSOR_MOUNTING_MATRIX_PATH	BASE_PATH "mounting_matrix"
+#define DEVICE_MOUNTING_MATRIX_PATH BASE_PATH "mount_matrix"
 
 #define CONFIGFS_TRIGGER_PATH	"/sys/kernel/config/iio/triggers/"
 
@@ -331,7 +332,7 @@ void check_trig_sensors (int i, char *sysfs_file, char map[catalog_size]);
 void check_poll_sensors (int i, char *sysfs_file, char map[catalog_size]);
 void check_event_sensors (int i, char *sysfs_file, char map[catalog_size]);
 void discover_sensors(int dev_num, char *sysfs_base_path, char map[catalog_size],
-		      void (*discover_sensor)(int, char*, char*));
+			  void (*discover_sensor)(int, char*, char*));
 
 /*
  * Macros associating iio sysfs entries to to sensor types ; see
@@ -363,9 +364,9 @@ void discover_sensors(int dev_num, char *sysfs_base_path, char map[catalog_size]
 #define DECLARE_GENERIC_CHANNEL(tag)		DECLARE_CHANNEL(tag, "", "")
 
 #define DECLARE_EVENT(tag, spacer1, name, spacer2, type, spacer3, dir)		\
-		      type, dir,						\
-		      "in_"tag spacer1 name spacer2 type spacer3 dir"_en",	\
-		      "in_"tag spacer1 name spacer2 type spacer3 dir"_value",	\
+			  type, dir,						\
+			  "in_"tag spacer1 name spacer2 type spacer3 dir"_en",	\
+			  "in_"tag spacer1 name spacer2 type spacer3 dir"_value",	\
 
 #define DECLARE_GENERIC_EVENT(tag, name, type, dir) \
 		DECLARE_EVENT(tag, "_", name, "_", type, "_", dir)
